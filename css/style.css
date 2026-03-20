@@ -1,8 +1,15 @@
 body {
     background-color: #070404;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     zoom: 80%;
+    
+    display: flex;           /* new */
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    height: 100vh;           /* full viewport height */
 }
-
 main {
     display: flex;
     justify-content: center;
@@ -10,21 +17,21 @@ main {
 }
 
 img {
-    height: 975px;
-    margin-top: -20px;
-    margin-left: 3px;
+    max-width: 100%;
+    max-height: 40vh;    /* scales on mobile */
+    object-fit: contain;  /* keep image ratio */
+    margin: 0;
 }
 
 .container {
-    background-color: #000000;
-    padding-top: 252px;
-    padding-right: 5px;
+    background-color: #000;
+    padding: 20px;       /* instead of huge padding-top */
     border-radius: 45px;
-    width: 410px;
-    height: 600px;
-    margin-top: 46px;
-    margin-right: -5px;
-    position: absolute;
+    width: 90vw;         /* responsive for mobile/laptop */
+    max-width: 410px;    /* prevent too wide on large screens */
+    height: auto;        /* let it grow naturally */
+    margin: 5vh auto 0 auto; /* center on screen */
+    position: relative;  /* remove absolute positioning */
 }
 
 .panel {
@@ -97,12 +104,13 @@ img {
 }
 
 footer {
+    margin-top: 5vh;
+    font-size: 5vw;      /* scales font on mobile */
     text-align: center;
-    font-size: 30px;
-    margin: 200px;
 }
 
 .github-link {
     text-decoration: none;
     color: #ff9f0a;
 }
+
