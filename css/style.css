@@ -1,71 +1,87 @@
+/* ---------------- Body ---------------- */
 body {
     background-color: #070404;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    zoom: 80%;
-    
-    display: flex;           /* new */
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-    height: 100vh;           /* full viewport height */
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: flex-start; /* start from top */
+    overflow: hidden;        /* no page scroll */
+    box-sizing: border-box;
 }
+
+/* ---------------- Main ---------------- */
 main {
     display: flex;
     justify-content: center;
-    padding: 4%;
+    width: 100%;
+    padding: 0;
 }
 
-img {
-    max-width: 100%;
-    max-height: 40vh;    /* scales on mobile */
-    object-fit: contain;  /* keep image ratio */
-    margin: 0;
-}
-
+/* ---------------- Container ---------------- */
 .container {
     background-color: #000;
-    padding: 20px;       /* instead of huge padding-top */
+    padding: 15px;
     border-radius: 45px;
-    width: 90vw;         /* responsive for mobile/laptop */
-    max-width: 410px;    /* prevent too wide on large screens */
-    height: auto;        /* let it grow naturally */
-    margin: 5vh auto 0 auto; /* center on screen */
-    position: relative;  /* remove absolute positioning */
+    width: 90vw;
+    max-width: 400px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin-top: 5vh;
+    box-sizing: border-box;
 }
 
+/* ---------------- Display Panel ---------------- */
 .panel {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    height: 70px;
-    margin-bottom: 30px;
-    margin-left: -5px;
+    height: auto;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .panel p {
-    color: #ffffff;
-    overflow: auto;
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 80px;
+    font-size: 8vw;
     margin: 0;
-    padding: 0 15px 0 0;
+    padding-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+/* ---------------- Buttons Grid ---------------- */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* ---------------- Button Styles ---------------- */
 .btn {
     border-radius: 50%;
-    border-style: none;
-    font-size: 34px;
-    width: 83px;
-    height: 83px;
-    margin: 5px;
+    border: none;
+    font-size: 6vw;      /* responsive text */
+    width: 20vw;         /* responsive button */
+    max-width: 100px;
+    height: 20vw;
+    max-height: 100px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .btn.especial {
-    color: #000000;
-    margin-left: 10px;
     background-color: #a5a5a5;
+    color: #000;
 }
 
 .btn.especial:hover {
@@ -73,9 +89,8 @@ img {
 }
 
 .btn.number, .btn.decimal {
-    color: #ffffff;
-    margin-left: 10px;
     background-color: #343434;
+    color: #fff;
 }
 
 .btn.number:hover, .btn.decimal:hover {
@@ -83,29 +98,23 @@ img {
 }
 
 .operator {
-    color: #ffffff;
-    margin-left: 10px;
     background-color: #ff9f0a;
+    color: #fff;
 }
 
 .operator:hover {
     background-color: #ffad32;
 }
 
+/* ---------------- Zero Button Special ---------------- */
 #zero {
-    border-radius: 50px;
-    width: 180px;
+    grid-column: span 2; /* spans two columns */
 }
 
-#zero p {
-    text-align: left;
-    margin-top: 23px;
-    margin-left: 27px;
-}
-
+/* ---------------- Footer ---------------- */
 footer {
     margin-top: 5vh;
-    font-size: 5vw;      /* scales font on mobile */
+    font-size: 5vw;
     text-align: center;
 }
 
@@ -114,3 +123,15 @@ footer {
     color: #ff9f0a;
 }
 
+/* ---------------- Media Queries ---------------- */
+/* Larger screens adjust buttons and font */
+@media (min-width: 768px) {
+    .btn {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+    .panel p {
+        font-size: 40px;
+    }
+}
