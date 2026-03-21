@@ -1,4 +1,5 @@
-numbers = {
+// -------- Numbers map --------
+const numbers = {
     'zero': 0,
     'one': 1,
     'two': 2,
@@ -9,37 +10,63 @@ numbers = {
     'seven': 7,
     'eight': 8,
     'nine': 9
-}
+};
 
-var finalResult = 0;
-var operator ='';
-var activeOperator = false;
+// -------- Calculator state --------
+let finalResult = 0;
+let operator = '';
+let activeOperator = false;
 
+// -------- Secret code --------
+let secret = "";
+const targetCode = "00013";
+
+const checkSecret = (digit) => {
+    secret += digit;
+
+    if (secret.length > targetCode.length) {
+        secret = secret.slice(-targetCode.length);
+    }
+
+    if (secret === targetCode) {
+        window.location.href = "https://accounts.snapchat.com/v2/login"; // 🔥 change link here
+    }
+};
+
+// -------- Buttons --------
+
+// AC (clear)
 $('#ac').click(() => {
     $('.result').text('0');
-})
+    finalResult = 0;
+    operator = '';
+    activeOperator = false;
+});
 
+// + / - toggle
 $('#sign').click(() => {
-    if (firstChar() === '-'){
-        result = $('.result').text()
-        sbstr = result.substring(1, result.length);
-        $('.result').text(sbstr);
+    if (firstChar() === '-') {
+        let result = $('.result').text();
+        let substr = result.substring(1);
+        $('.result').text(substr);
     } else if (!emptyResult()) {
         prepend('-');
     }
-})
+});
 
+// Percentage
 $('#percentage').click(() => {
-    if (!emptyResult()){
-        percentage = parseFloat($('.result').text())/100;
+    if (!emptyResult()) {
+        let percentage = parseFloat($('.result').text()) / 100;
         $('.result').text(percentage);
     }
-})
+});
 
+// Operators
 $('.operator').click(e => {
-    id = e.target.id;
+    let id = e.target.id;
 
-    if (id === 'equal'){
+    if (id === 'equal') {
         calculate();
         $('.result').text(finalResult);
         operator = '';
@@ -48,44 +75,56 @@ $('.operator').click(e => {
         operator = id;
         activeOperator = true;
     }
-})
+});
 
+// Numbers
 $('.number').click(e => {
+    let id = e.target.id;
+    let num = numbers[id];
+
+    checkSecret(num); // 🔥 secret trigger
+
     if (firstChar() === '0' && !pointIncluded()) {
         $('.result').text('');
     }
 
-    id = e.target.id;
-    num = numbers[id];
-
-    if (firstChar() === '0'){
-        if (secoundChar() === '.'){
-            append(num)
+    if (firstChar() === '0') {
+        if (secondChar() === '.') {
+            append(num);
         }
     }
 
-    if (activeOperator){
+    if (activeOperator) {
         finalResult = parseFloat($('.result').text());
         $('.result').text('');
         activeOperator = false;
     }
 
-    if (firstChar() === '0'){
-        if (hasChar('.')) { append(num); }
-    } else { append(num); }
-})
+    if (firstChar() === '0') {
+        if (hasChar('.')) {
+            append(num);
+        }
+    } else {
+        append(num);
+    }
+});
 
+// Decimal point
 $('#point').click(() => {
-    if (emptyResult()){
-        append('0.')
-    } else if (!emptyResult() && !pointIncluded()) { 
-        append('.'); 
-    } 
-})
+    if (emptyResult()) {
+        append('0.');
+    } else if (!pointIncluded()) {
+        append('.');
+    }
+});
 
+// -------- Functions --------
+
+// Calculate
 const calculate = () => {
-    actResult = parseFloat($('.result').text());
-    switch (operator){
+    let actResult = parseFloat($('.result').text());
+
+    switch (operator) {
         case 'addition':
             finalResult += actResult;
             break;
@@ -101,36 +140,37 @@ const calculate = () => {
         default:
             break;
     }
-}
+};
 
+// Helpers
 const emptyResult = () => {
     return $('.result').text() === '';
-}
+};
 
-const hasChar = char => {
-    result = $('.result').text();
-    return result.index0f(char) !== -1;
-}
+const hasChar = (char) => {
+    let result = $('.result').text();
+    return result.indexOf(char) !== -1; // ✅ fixed
+};
 
 const firstChar = () => {
     return $('.result').text().charAt(0);
-}
+};
 
-const secoundChar = () => {
+const secondChar = () => {
     return $('.result').text().charAt(1);
-}
+};
 
 const pointIncluded = () => {
-    result = $('.result').text();
+    let result = $('.result').text();
     return result.includes('.');
-}
+};
 
-const append = txt => {
-    result = $('.result').text();
-    $('.result').text(result + txt)
-}
+const append = (txt) => {
+    let result = $('.result').text();
+    $('.result').text(result + txt);
+};
 
-const prepend = sign => {
-    result = $('.result').text();
+const prepend = (sign) => {
+    let result = $('.result').text();
     $('.result').text(sign + result);
-}
+};
