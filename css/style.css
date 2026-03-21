@@ -1,87 +1,72 @@
-/* ---------------- Body ---------------- */
+
+
 body {
     background-color: #070404;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    overflow: hidden;       /* prevents page scroll */
     display: flex;
     justify-content: center; /* horizontal center */
     align-items: flex-start; /* start from top */
-    overflow: hidden;        /* no page scroll */
-    box-sizing: border-box;
+    height: 100vh;           /* full viewport */
 }
 
-/* ---------------- Main ---------------- */
+
 main {
     display: flex;
     justify-content: center;
-    width: 100%;
-    padding: 0;
+    padding: 4%;
 }
 
-/* ---------------- Container ---------------- */
+img {
+    max-width: 100%;
+    max-height: 30vh;    /* scales on mobile */
+    object-fit: contain;  /* keep image ratio */
+    margin: 0;
+}
+
 .container {
     background-color: #000;
-    padding: 15px;
+    padding: 10px;
     border-radius: 45px;
     width: 90vw;
-    max-width: 400px;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow: hidden;
-    margin-top: 5vh;
-    box-sizing: border-box;
+    max-width: 410px;
+    height: auto;
+    margin: 40vh auto 0 auto; /* smaller top margin = moves it up */
+    position: relative;
 }
 
-/* ---------------- Display Panel ---------------- */
 .panel {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-    overflow: hidden;
+    height: 70px;
+    margin-bottom: 30px;
+    margin-left: -5px;
 }
 
 .panel p {
-    color: #fff;
+    color: #ffffff;
+    overflow: auto;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 8vw;
+    font-size: 20vw; /* scales with screen width */
     margin: 0;
-    padding-right: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 0 15px 0 0;
 }
 
-/* ---------------- Buttons Grid ---------------- */
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    justify-items: center;
-    align-items: center;
-}
-
-/* ---------------- Button Styles ---------------- */
 .btn {
-    border-radius: 50%;
+    border-radius: 70%;
     border: none;
-    font-size: 6vw;      /* responsive text */
-    width: 20vw;         /* responsive button */
-    max-width: 100px;
-    height: 20vw;
-    max-height: 100px;
-    cursor: pointer;
-    transition: background 0.2s;
+    font-size: 38px;  /* bigger text */
+    width: 100px;     /* bigger button */
+    height: 100px;    /* bigger button */
+    margin: 6px;      /* slightly more spacing */
 }
-
 .btn.especial {
+    color: #000000;
+    margin-left: 10px;
     background-color: #a5a5a5;
-    color: #000;
 }
 
 .btn.especial:hover {
@@ -89,8 +74,9 @@ main {
 }
 
 .btn.number, .btn.decimal {
+    color: #ffffff;
+    margin-left: 10px;
     background-color: #343434;
-    color: #fff;
 }
 
 .btn.number:hover, .btn.decimal:hover {
@@ -98,23 +84,29 @@ main {
 }
 
 .operator {
+    color: #ffffff;
+    margin-left: 10px;
     background-color: #ff9f0a;
-    color: #fff;
 }
 
 .operator:hover {
     background-color: #ffad32;
 }
 
-/* ---------------- Zero Button Special ---------------- */
 #zero {
-    grid-column: span 2; /* spans two columns */
+    border-radius: 50px;
+    width: 180px;
 }
 
-/* ---------------- Footer ---------------- */
+#zero p {
+    text-align: left;
+    margin-top: 23px;
+    margin-left: 27px;
+}
+
 footer {
     margin-top: 5vh;
-    font-size: 5vw;
+    font-size: 5vw;      /* scales font on mobile */
     text-align: center;
 }
 
@@ -123,15 +115,3 @@ footer {
     color: #ff9f0a;
 }
 
-/* ---------------- Media Queries ---------------- */
-/* Larger screens adjust buttons and font */
-@media (min-width: 768px) {
-    .btn {
-        width: 80px;
-        height: 80px;
-        font-size: 32px;
-    }
-    .panel p {
-        font-size: 40px;
-    }
-}
